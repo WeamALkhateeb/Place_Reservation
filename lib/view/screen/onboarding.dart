@@ -18,7 +18,7 @@ class OnBoarding extends StatelessWidget {
         child: Column(
           children: [
             const Expanded(
-              flex: 5,
+              flex: 6,
               child: SilderOnBoarding(),
             ),
              Expanded(
