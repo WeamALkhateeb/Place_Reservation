@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project2/view/screen/auth/login.dart';
 import 'package:project2/view/screen/onboarding.dart';
 
 import 'routes.dart';
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: OnBoarding(),
       routes: routes ,
+
     );
   }
 }
