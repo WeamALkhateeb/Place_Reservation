@@ -4,12 +4,17 @@ import '../../../core/constant/color.dart';
 
 
 class Textformfieldauth extends StatelessWidget{
+  final TextEditingController mycontroller;
   final String hinttext;
   final IconData iconData;
+  final String? Function(String?)? valid;
+
+
 
   const Textformfieldauth({Key? key,
-  required this.hinttext,
-  required this.iconData,}) : super(key: key);
+    required this.mycontroller,
+    required this.hinttext,
+    required this.iconData,required this.valid, }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +22,8 @@ class Textformfieldauth extends StatelessWidget{
    return  Container(
        margin: const EdgeInsets.symmetric(horizontal:30,vertical: 5),
        child: TextFormField(
+         validator: valid,
+          controller: mycontroller,
           decoration: InputDecoration(
            filled: true,
            fillColor: sixBackColor,
@@ -29,8 +36,9 @@ class Textformfieldauth extends StatelessWidget{
            ),
            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
            prefixIcon: Icon( iconData ,color: fiveBackColor,),
-         ),
-       ));
+
+
+       )));
   }
 
 }
