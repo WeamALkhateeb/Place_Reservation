@@ -15,6 +15,7 @@ class MyTranslation extends Translations{
       "Search" : "البحث",
       "You can save time and effort\n by searching for the place" : "يمكنك توفير الوقت والجهد\n بالبحث عن المكان",
 
+
     },
     "en" : {
       "1" : "Choose Language",
