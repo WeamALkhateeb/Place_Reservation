@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../core/constant/color.dart';
 
@@ -8,13 +7,14 @@ class Textformfieldauth extends StatelessWidget{
   final String hinttext;
   final IconData iconData;
   final String? Function(String?)? valid;
+  final TextInputType? keyboardType;
 
 
 
   const Textformfieldauth({Key? key,
     required this.mycontroller,
     required this.hinttext,
-    required this.iconData,required this.valid, }) : super(key: key);
+    required this.iconData,required this.valid, this.keyboardType, }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +24,7 @@ class Textformfieldauth extends StatelessWidget{
        child: TextFormField(
          validator: valid,
           controller: mycontroller,
+          keyboardType: keyboardType ,
           decoration: InputDecoration(
            filled: true,
            fillColor: sixBackColor,
