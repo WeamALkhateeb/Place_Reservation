@@ -14,12 +14,13 @@ class Register extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    RegistercontrollerImp conteoller = Get.put(RegistercontrollerImp());
+    RegistercontrollerImp controller = Get.put(RegistercontrollerImp());
+
    return Scaffold(
      appBar: AppBar(
        backgroundColor: fourBackColor,
        elevation: 0,
-       title:const Text('Register',style: TextStyle(color: white,fontFamily:'DeliciousHandrawn',fontSize: 25)),
+       title: Text('Register'.tr,style: TextStyle(color: white,fontFamily:'DeliciousHandrawn',fontSize: 25)),
        centerTitle: true,
        flexibleSpace: Container(
            decoration:const BoxDecoration(
@@ -34,7 +35,7 @@ class Register extends StatelessWidget{
        child:SingleChildScrollView(
          scrollDirection: Axis.vertical,
          child: Form(
-           key: conteoller.formstatee,
+           key: controller.formstatee,
            child: Column(
                children: [
                  const SizedBox(height: 20,),
@@ -44,34 +45,42 @@ class Register extends StatelessWidget{
                  const SizedBox(height: 30,),
                  Textformfieldauth(valid: (value ) {
                    return validateinput(value!, 5 , 25); },
-                   mycontroller: conteoller.username,
+                   mycontroller: controller.username,
                    hinttext: 'Enter your name',
-                   iconData: Icons.person,
+                   iconDataprefix: Icons.person,
                  keyboardType: TextInputType.name,),
                  const SizedBox(height: 5,),
                  Textformfieldauth(valid: (value ) {
                    return validateinput(value!, 10, 50);},
-                   mycontroller: conteoller.email,
+                   mycontroller: controller.email,
                    hinttext: 'Enter your email',
-                   iconData: Icons.email,
+                   iconDataprefix: Icons.email,
                  keyboardType: TextInputType.emailAddress,),
                  const SizedBox(height: 5,),
-                 Textformfieldauth(valid: (value ) {
-                   return validateinput(value!, 8 , 20);},
-                   mycontroller: conteoller.password,
-                   hinttext: 'Enter your password ',
-                   iconData: Icons.lock,),
+                 GetBuilder<RegistercontrollerImp>(
+                   builder: (controller) {
+                     return Textformfieldauth(valid: (value ) {
+                       return validateinput(value!, 8 , 20);},
+                       obscuretext: controller.isshowpassword,
+                       onTapicon: (){
+                         controller.showpassword();},
+                       mycontroller: controller.password,
+                       hinttext: 'Enter your password ',
+                       iconDataprefix: Icons.lock,
+                       iconDatasuffix:controller.isshowpassword? Icons.visibility :Icons.visibility_off ,);
+                   }
+                 ),
                  const SizedBox(height: 5,),
                  Textformfieldauth(valid: (value) {
                    return validateinput(value!, 8 , 20); },
-                   mycontroller: conteoller.confirmpassword,
+                   mycontroller: controller.confirmpassword,
                    hinttext: 'Confirm password ',
-                   iconData: Icons.lock,),
+                   iconDataprefix: Icons.lock,),
                  const  SizedBox(height: 20,),
-                 MaterialButtonAuth(onPressed:(){conteoller.Register();},text: 'Sign up',),
-                 const SizedBox(height: 35,),
-                 Rowauth(text1: " Already have an account ?", onTap: (){
-                   conteoller.gotoLogin();
+                 MaterialButtonAuth(onPressed:(){controller.Register();},text: 'Sign up',),
+                 const SizedBox(height: 20,),
+                 Rowauth(text1: " Already have an account ?".tr, onTap: (){
+                   controller.gotoLogin();
                  }, text2: 'Sign in'),
 
                ] ),

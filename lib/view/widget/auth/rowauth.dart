@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../core/constant/color.dart';
 
 
@@ -15,17 +16,17 @@ class Rowauth extends StatelessWidget{
    return    Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-     Text(text1,style:const TextStyle(color: fiveBackColor,fontWeight: FontWeight.w400,fontSize: 13),),
+     Text(text1.tr,style:const TextStyle(color: fiveBackColor,fontWeight: FontWeight.w400,fontSize: 13),),
     const SizedBox(width: 10,),
      InkWell(onTap: onTap,
    child:Container(
-   width: 70,
+   width: 90,
    height: 30,
    decoration: BoxDecoration(
    color:sixBackColor,
    borderRadius: BorderRadius.circular(10)),
 
-   child: Center(child:  Text(text2,style:const TextStyle(color: fourBackColor,fontWeight: FontWeight.bold,fontSize: 13),))))
+   child: Center(child:  Text(text2.tr,style:const TextStyle(color: fourBackColor,fontWeight: FontWeight.bold,fontSize: 13),))))
 
     ],
    );

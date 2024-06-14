@@ -18,7 +18,7 @@ class Login extends StatelessWidget {
         appBar: AppBar(
         backgroundColor: fourBackColor,
         elevation: 0,
-        title:const Text('Login',style: TextStyle(color: white,fontFamily:'DeliciousHandrawn',fontSize: 25)),
+        title:Text('Login'.tr,style: TextStyle(color: white,fontFamily:'DeliciousHandrawn',fontSize: 25)),
         centerTitle: true,
         flexibleSpace: Container(
                        decoration:const BoxDecoration(
@@ -45,18 +45,24 @@ class Login extends StatelessWidget {
                       return validateinput(value!, 10 , 50); },
                       mycontroller: controller.email ,
                       hinttext: 'Enter your email',
-                      iconData: Icons.email,
+                      iconDataprefix: Icons.email,
                       keyboardType: TextInputType.emailAddress,),
                     const SizedBox(height: 5,),
-                    Textformfieldauth(valid: (value ) {
-                      return validateinput(value!, 8 , 20); },
-                      mycontroller: controller.password,
-                      hinttext: 'Enter your password ',
-                      iconData: Icons.lock,),
+                    GetBuilder<LogincontrollerImp>(
+                     builder:(controller)=> Textformfieldauth(valid: (value ) {
+                        return validateinput(value!, 8 , 20); },
+                        obscuretext: controller.isshowpassword,
+                        onTapicon: (){
+                        controller.showpassword();},
+                        mycontroller: controller.password,
+                        hinttext: 'Enter your password ',
+                        iconDataprefix: Icons.lock,
+                        iconDatasuffix:controller.isshowpassword? Icons.visibility :Icons.visibility_off ,),
+                    ),
                     const  SizedBox(height: 20,),
                     MaterialButtonAuth(onPressed:(){ controller.Login();},text: 'Sign in',),
                     const SizedBox(height: 35,),
-                    Rowauth(text1: " Don't have an account ?", onTap: (){
+                    Rowauth(text1: " Don't have an account ?".tr, onTap: (){
                       controller.gotoRegister();
                     }, text2: 'Sign up'),
 
