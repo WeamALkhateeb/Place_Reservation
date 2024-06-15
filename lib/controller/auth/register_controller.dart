@@ -15,12 +15,27 @@ class RegistercontrollerImp extends Registercontroller{
   late TextEditingController email;
   late TextEditingController password;
   late TextEditingController confirmpassword;
+  bool isshowpassword =true;
+
+
+  showpassword()
+  {
+    isshowpassword = isshowpassword == true ? false :true;
+    update();
+
+  }
+
+
+
+
+
 
   @override
   Register() {
     var formdataa = formstatee.currentState;
     if(formdataa!.validate())
-    {print(" valid");}
+    {// انتقال لصفحة الهوم
+      print(" valid");}
     else
     {print(" not valid");}
   }

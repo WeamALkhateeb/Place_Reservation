@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:project2/core/constant/color.dart';
 
 class MaterialButtonAuth extends StatelessWidget{
@@ -19,7 +20,7 @@ class MaterialButtonAuth extends StatelessWidget{
         color: fourBackColor,
         textColor: white,
         onPressed: onPressed,
-        child: Text(text , style:const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),), ),
+        child: Text(text.tr , style:const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),), ),
     );
   }
 
