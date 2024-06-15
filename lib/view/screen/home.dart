@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project2/controller/home_controller.dart';
-
-import '../../controller/auth/login_controller.dart';
 import '../../core/constant/color.dart';
-import '../../core/functions/validateinput.dart';
-import '../widget/auth/textformfiledauth.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,12 +11,19 @@ class HomePage extends StatelessWidget {
     HomeControllerImp controller = Get.put(HomeControllerImp());
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(250),
+        preferredSize: Size.fromHeight(200),
         child: AppBar(
+          title: Text('Hi 👋🏻\n Let\'s start browsing',
+              style: TextStyle(
+                  color: white,
+                 fontWeight: FontWeight.w100,
+                  fontFamily:'DeliciousHandrawn',
+                  fontSize: 22),),
+
           elevation:0,
           backgroundColor: fourBackColor,
           shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(0),bottomRight: Radius.circular(0)),
+            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(25),bottomRight: Radius.circular(25)),
           ),
           bottom:PreferredSize(
             preferredSize: Size.fromHeight(100),
@@ -37,18 +40,20 @@ class HomePage extends StatelessWidget {
                   ),
                   focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(100 )),
                   prefixIcon: const Icon(Icons.search,color: fourBackColor,),
-
-
                 )
             ),
           ),
-          actions: [
+          actions:[
             IconButton(
               icon: Icon(Icons.notifications),
               onPressed: () {},
             ),
           ],
         ),
+      ),
+      body: Column(
+        children: [
+        ],
       ),
     );
   }
