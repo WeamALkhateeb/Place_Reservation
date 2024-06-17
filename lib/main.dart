@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:project2/core/localization/changelocal.dart';
 import 'package:project2/core/localization/translation.dart';
 import 'package:project2/core/services/services.dart';
+import 'package:project2/view/screen/home.dart';
 import 'package:project2/view/screen/language.dart';
 import 'package:project2/view/screen/auth/login.dart';
 import 'package:project2/view/screen/onboarding.dart';

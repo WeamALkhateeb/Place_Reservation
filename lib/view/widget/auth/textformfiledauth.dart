@@ -51,7 +51,8 @@ class Textformfieldauth extends StatelessWidget{
                                   onTap: onTapicon ,)
 
 
-       )));
+       )
+       ));
   }
 
 }
