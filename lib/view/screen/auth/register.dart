@@ -75,7 +75,11 @@ class Register extends StatelessWidget{
                    return validateinput(value!, 8 , 20); },
                    mycontroller: controller.confirmpassword,
                    hinttext: 'Confirm password ',
-                   iconDataprefix: Icons.lock,),
+                   iconDataprefix: Icons.lock,
+                   obscuretext: controller.isshowconfpassword,
+                   onTapicon: (){
+                     controller.showconfpassword(); },
+                   iconDatasuffix:controller.isshowconfpassword? Icons.visibility :Icons.visibility_off ,),
                  const  SizedBox(height: 20,),
                  MaterialButtonAuth(onPressed:(){controller.Register();},text: 'Sign up',),
                  const SizedBox(height: 20,),
