@@ -45,8 +45,15 @@ class Register extends StatelessWidget{
                  const SizedBox(height: 30,),
                  Textformfieldauth(valid: (value ) {
                    return validateinput(value!, 5 , 25); },
-                   mycontroller: controller.username,
+                   mycontroller: controller.name,
                    hinttext: 'Enter your name',
+                   iconDataprefix: Icons.person,
+                   keyboardType: TextInputType.name,),
+                 const SizedBox(height: 5,),
+                 Textformfieldauth(valid: (value ) {
+                   return validateinput(value!, 5 , 25); },
+                   mycontroller: controller.username,
+                   hinttext: 'Enter your username',
                    iconDataprefix: Icons.person,
                  keyboardType: TextInputType.name,),
                  const SizedBox(height: 5,),
@@ -71,11 +78,19 @@ class Register extends StatelessWidget{
                    }
                  ),
                  const SizedBox(height: 5,),
-                 Textformfieldauth(valid: (value) {
-                   return validateinput(value!, 8 , 20); },
-                   mycontroller: controller.confirmpassword,
-                   hinttext: 'Confirm password ',
-                   iconDataprefix: Icons.lock,),
+                 GetBuilder<RegistercontrollerImp>(
+                   builder: (controller) {
+                     return Textformfieldauth(valid: (value) {
+                       return validateinput(value!, 8 , 20); },
+                       mycontroller: controller.confirmpassword,
+                       hinttext: 'Confirm password ',
+                       iconDataprefix: Icons.lock,
+                       obscuretext: controller.isshowconfpassword,
+                       onTapicon: (){
+                         controller.showconfpassword();},
+                       iconDatasuffix:controller.isshowconfpassword? Icons.visibility :Icons.visibility_off ,);
+                   }
+                 ),
                  const  SizedBox(height: 20,),
                  MaterialButtonAuth(onPressed:(){controller.Register();},text: 'Sign up',),
                  const SizedBox(height: 20,),
