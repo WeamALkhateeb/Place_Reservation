@@ -55,7 +55,7 @@ class Login extends StatelessWidget {
                         onTapicon: (){
                         controller.showpassword();},
                         mycontroller: controller.password,
-                        hinttext: 'Enter your password ',
+                        hinttext: 'Enter your password'.tr,
                         iconDataprefix: Icons.lock,
                         iconDatasuffix:controller.isshowpassword? Icons.visibility :Icons.visibility_off ,),
                     ),

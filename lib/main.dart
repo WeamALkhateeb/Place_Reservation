@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       translations: MyTranslation(),
       debugShowCheckedModeBanner: false,
       locale: controller.language,
-      home: const HomePage(),
+      home: const Language(),
       routes: routes ,
 
     );

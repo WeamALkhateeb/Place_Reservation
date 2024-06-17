@@ -51,9 +51,8 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      body: Column(
-        children: [
-        ],
+      body: Container(
+      child: ListView(),
       ),
     );
   }

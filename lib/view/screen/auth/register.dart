@@ -65,7 +65,7 @@ class Register extends StatelessWidget{
                        onTapicon: (){
                          controller.showpassword();},
                        mycontroller: controller.password,
-                       hinttext: 'Enter your password ',
+                       hinttext: 'Enter your password'.tr,
                        iconDataprefix: Icons.lock,
                        iconDatasuffix:controller.isshowpassword? Icons.visibility :Icons.visibility_off ,);
                    }
@@ -74,12 +74,12 @@ class Register extends StatelessWidget{
                  Textformfieldauth(valid: (value) {
                    return validateinput(value!, 8 , 20); },
                    mycontroller: controller.confirmpassword,
-                   hinttext: 'Confirm password ',
+                   hinttext: 'Confirm password'.tr,
                    iconDataprefix: Icons.lock,),
                  const  SizedBox(height: 20,),
                  MaterialButtonAuth(onPressed:(){controller.Register();},text: 'Sign up',),
                  const SizedBox(height: 20,),
-                 Rowauth(text1: " Already have an account ?".tr, onTap: (){
+                 Rowauth(text1: "Already have an account ? ".tr, onTap: (){
                    controller.gotoLogin();
                  }, text2: 'Sign in'),
 

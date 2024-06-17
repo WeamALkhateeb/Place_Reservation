@@ -22,7 +22,7 @@ class MyTranslation extends Translations{
       "Sign up" : "التسجيل",
       "Sign in" : "تسجيل الدخول",
       "Already have an account ? " : " هل لديك حساب ؟ " ,
-      "Don't have an account ? " : " ليس لديك حساب ؟",
+      " Don't have an account ?" : " ليس لديك حساب ؟",
       "Register" : "التسجيل",
       "can't be Empty" : "لا يمكن أن تكون فارغة",
       "can't be less than " : "لا يمكن أن يكون أقل من",
