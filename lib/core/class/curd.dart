@@ -8,30 +8,28 @@ class Crud
 {
   Future<Either<StatusRequest,Map>> post(String url , Map data) async {
 
-
-         try{
            print('222222222222222222222222');
-           var response = await http.post(Uri.parse(url), body: data);
+           var response = await http.post(
+               Uri.parse(url),
+               body: data,
+           );
            print('333333333333333333333333333333333333333333');
-           print(response.statusCode);
-           if(response.statusCode == 200)
-           { print('44444444444444444444444444');
-           Map responsebody = jsonDecode(response.body);
+           var responsebody = jsonDecode(response.body) ;
            print(responsebody);
+           print("55555$response.statusCode");
+           if(response.statusCode == 200) {
+             print('44444444444444444444444444');
+           // Map responsebody = jsonDecode(response.body);
+           // print(responsebody);
            return Right(responsebody) ;
            }
-           else {
+           else if (response.statusCode == 400 || response.statusCode == 401) {
              print('5555555555555555555555555555555');
              return const Left(StatusRequest.serverfailure);
            }
-         }
-         catch(_)
-    {
-      return const Left(StatusRequest.serverException);
-    }
-
-
-
+           else {
+             return const Left(StatusRequest.offlinefailure) ;
+           }
   }
 
   Future <Either<StatusRequest, Map>> get(String linkurl) async {
