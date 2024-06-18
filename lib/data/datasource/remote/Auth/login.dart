@@ -6,9 +6,9 @@ class LoginData{
   Crud crud;
   LoginData(this.crud);
 
-  postdata(  String username, String password)async{
+  postdata(  String user_name, String password)async{
     var response = await crud.post(AppLink.loginup, {
-      "username" : username ,
+      "user_name" : user_name ,
       "password" :password ,
      });
     return response.fold((l) => l, (r) => r);
