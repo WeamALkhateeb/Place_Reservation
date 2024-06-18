@@ -2,6 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:project2/core/constant/routes.dart';
 
+import '../../core/class/statusrequest.dart';
+import '../../core/functions/handlingData.dart';
+import '../../data/datasource/remote/Auth/login.dart';
+
 abstract class Logincontroller extends GetxController{
   Login();
   gotoRegister();
@@ -10,10 +14,11 @@ abstract class Logincontroller extends GetxController{
 class LogincontrollerImp extends Logincontroller{
 
   GlobalKey<FormState> formstate =GlobalKey<FormState>();
- late TextEditingController email;
- late TextEditingController password;
- bool isshowpassword =true;
-
+  late TextEditingController username;
+  late TextEditingController password;
+  bool isshowpassword =true;
+  StatusRequest? statusRequest;
+  LoginData loginData =LoginData(Get.find());
 
  showpassword()
  {
@@ -24,12 +29,33 @@ class LogincontrollerImp extends Logincontroller{
 
 
   @override
-  Login() {
+  Login() async {
   var formdata = formstate.currentState;
   if(formdata!.validate())
-    {print('valid');}
+  {
+    statusRequest = StatusRequest.loading ;
+    update();
+    print('000000000000000000000000000000000000');
+    var response = await  loginData.postdata( username.text,password.text);
+    print("-----------------------------controller $response--------------------");
+    statusRequest=handlingData(response);
+    if(StatusRequest.success == statusRequest)
+    {  print('ةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةة');
+    if(response["status"] == "Success" ){
+      //data.addAll(response['data']);
+      print('sssssssssssssssssssssssssssssssssss');
+      Get.offNamed(AppRoute.homepage);
+    }
+    else
+    {  Get.defaultDialog(title: "warning" , middleText: "User name or Password Not Correct ");
+    statusRequest = StatusRequest.failure;
+    }
+    }
+    update();
+  }
+
   else
-    {print ('not valid');}
+  { print('gggggggg'); }
   }
 
   @override
@@ -37,7 +63,7 @@ class LogincontrollerImp extends Logincontroller{
    Get.offNamed(AppRoute.register);
   }
 void onInit(){
-   email = TextEditingController();
+   username = TextEditingController();
    password=TextEditingController();
    super.onInit();
 }
@@ -45,7 +71,7 @@ void onInit(){
 
 
  void dispose(){
-  email.dispose();
+  username.dispose();
   password.dispose();
   super.dispose();
  }

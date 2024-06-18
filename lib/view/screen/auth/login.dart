@@ -34,39 +34,43 @@ class Login extends StatelessWidget {
           scrollDirection: Axis.vertical,
             child: Form(
               key: controller.formstate,
-              child: Column(
-                children: [
-                  const SizedBox(height: 20,),
-                  Image.asset('assets/images/login.png',
-                  width: 350,
-                  height: 300,),
-                      const SizedBox(height: 40,),
-                    Textformfieldauth(valid: (value ) {
-                      return validateinput(value!, 10 , 50); },
-                      mycontroller: controller.email ,
-                      hinttext: 'Enter your email',
-                      iconDataprefix: Icons.email,
-                      keyboardType: TextInputType.emailAddress,),
-                    const SizedBox(height: 5,),
-                    GetBuilder<LogincontrollerImp>(
-                     builder:(controller)=> Textformfieldauth(valid: (value ) {
-                        return validateinput(value!, 8 , 20); },
-                        obscuretext: controller.isshowpassword,
-                        onTapicon: (){
-                        controller.showpassword();},
-                        mycontroller: controller.password,
-                        hinttext: 'Enter your password'.tr,
-                        iconDataprefix: Icons.lock,
-                        iconDatasuffix:controller.isshowpassword? Icons.visibility :Icons.visibility_off ,),
-                    ),
-                    const  SizedBox(height: 20,),
-                    MaterialButtonAuth(onPressed:(){ controller.Login();},text: 'Sign in',),
-                    const SizedBox(height: 35,),
-                    Rowauth(text1: " Don't have an account ?".tr, onTap: (){
-                      controller.gotoRegister();
-                    }, text2: 'Sign up'),
+              child: GetBuilder<LogincontrollerImp>(
+                       builder: (controller) =>
+                           Column(
+                    children: [
+                      const SizedBox(height: 20,),
+                      Image.asset('assets/images/login.png',
+                      width: 350,
+                      height: 300,),
+                          const SizedBox(height: 40,),
+                        Textformfieldauth(valid: (value ) {
+                          return validateinput(value!, 5 , 25); },
+                          mycontroller: controller.username ,
+                          hinttext: 'Enter user name',
+                          iconDataprefix: Icons.person,
+                          keyboardType: TextInputType.name,),
+                        const SizedBox(height: 5,),
+                        GetBuilder<LogincontrollerImp>(
+                         builder:(controller)=> Textformfieldauth(valid: (value ) {
+                            return validateinput(value!, 8 , 20); },
+                            obscuretext: controller.isshowpassword,
+                            onTapicon: (){
+                            controller.showpassword();},
+                            mycontroller: controller.password,
+                            hinttext: 'Enter your password'.tr,
+                            iconDataprefix: Icons.lock,
+                            iconDatasuffix:controller.isshowpassword? Icons.visibility :Icons.visibility_off ,),
+                        ),
+                        const  SizedBox(height: 20,),
+                        MaterialButtonAuth(onPressed:(){ controller.Login();},text: 'Sign in',),
+                        const SizedBox(height: 35,),
+                        Rowauth(text1: " Don't have an account ?".tr, onTap: (){
+                          controller.gotoRegister();
+                        }, text2: 'Sign up'),
 
-  ] ),
+  ] )
+
+              ),
             ),
                 ), ));
   }

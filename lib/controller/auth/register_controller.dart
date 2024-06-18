@@ -13,6 +13,7 @@ abstract class Registercontroller extends GetxController{
 }
 
 class RegistercontrollerImp extends Registercontroller{
+
   GlobalKey<FormState> formstatee =GlobalKey<FormState>();
   late TextEditingController name;
   late TextEditingController username;
@@ -21,10 +22,11 @@ class RegistercontrollerImp extends Registercontroller{
   late TextEditingController confirmpassword;
   bool isshowpassword =true;
   bool isshowconfpassword =true;
-  late StatusRequest statusRequest ;
+  StatusRequest? statusRequest ;
+  List data=[];
 
   SignupData signupData =SignupData(Get.find());
- List data=[];
+
 
   showpassword()
   {
@@ -46,33 +48,39 @@ class RegistercontrollerImp extends Registercontroller{
     if(formdataa!.validate())
     {
       statusRequest = StatusRequest.loading ;
+      update();
       print('000000000000000000000000000000000000');
-      var response = await  signupData.postdata(name.text, username.text,email.text,password.text,confirmpassword.text);
+      var response = await  signupData.postdata( name.text, username.text , email.text , password.text ,confirmpassword.text);
       print("-----------------------------controller $response--------------------");
-
       statusRequest=handlingData(response);
       if(StatusRequest.success == statusRequest)
-        {  print('ةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةة');
-          if(response["status"] == "Success" ){
+        {  print('11111111111111111111111');
+           if(response["status"] == "Success" ){
             data.addAll(response['data']);
-            print('ssssssssssssssssssssssssssssssssssssssssssssss');
+            print('sssssssssssssssssssssssssssssssssss');
+            Get.offNamed(AppRoute.homepage);
           }
           else
-            {
-              statusRequest = StatusRequest.failure;
+            {  Get.defaultDialog(title: "warning" , middleText: "Username or Email Already Exists ");
+               statusRequest = StatusRequest.failure;
             }
         }
       update();
     }
 
     else
-    { }
+    { print('gggggggg'); }
   }
+
+
 
   @override
   gotoLogin() {
     Get.offNamed(AppRoute.login);
   }
+
+
+
   void onInit(){
     name=TextEditingController();
     username=TextEditingController();

@@ -12,7 +12,7 @@ class SignupData {
       "email" : email ,
       "password" :password ,
       "passwordconfirmation" :passwordconfimation,});
-    return response.fold((l) => l, (r) => r);
+    return response.fold((l) => l, (r) => r) ;
 
   }
 
