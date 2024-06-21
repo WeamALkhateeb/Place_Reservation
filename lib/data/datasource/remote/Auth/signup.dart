@@ -11,7 +11,7 @@ class SignupData {
       "user_name" : user_name ,
       "email" : email ,
       "password" :password ,
-      "password_confirmation" :password_confirmation,});
+      "password_confirmation" :password_confirmation,},{});
     return response.fold((l) => l, (r) => r) ;
 
   }

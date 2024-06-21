@@ -1,7 +1,6 @@
 import '../../../../appLink.dart';
 import '../../../../core/class/curd.dart';
 
-
 class LoginData{
   Crud crud;
   LoginData(this.crud);
@@ -10,9 +9,7 @@ class LoginData{
     var response = await crud.post(AppLink.loginup, {
       "user_name" : user_name ,
       "password" :password ,
-     });
+     },{});
     return response.fold((l) => l, (r) => r);
-
   }
-
 }
