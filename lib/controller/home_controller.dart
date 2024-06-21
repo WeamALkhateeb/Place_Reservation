@@ -17,11 +17,15 @@ class HomeControllerImp extends HomeController {
 
   List categories = [];
 
+  late String user_name;
+  late String id;
+
   late StatusRequest statusRequest;
 
   @override
   initialData() {
-
+        user_name = myServices.sharedPreferances.toString();
+        id = myServices.sharedPreferances.toString();
   }
 
   @override
@@ -39,10 +43,10 @@ class HomeControllerImp extends HomeController {
     statusRequest=handlingData(response);
     if(StatusRequest.success == statusRequest){
       if(response["status"] == "Success" ){
-      categories.addAll(response['categories']);
-     } else{
-         statusRequest = StatusRequest.failure;
-    }
+        categories.addAll(response['model']);
+      } else{
+        statusRequest = StatusRequest.failure;
+      }
     }
     update();
   }

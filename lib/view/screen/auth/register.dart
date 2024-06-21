@@ -48,14 +48,14 @@ class Register extends StatelessWidget{
                        height: 200,),
                      const SizedBox(height: 30,),
                      Textformfieldauth(valid: (value ) {
-                       return validateinput(value!, 5 , 25); },
+                       return validateinput(value!, 2 , 25); },
                        mycontroller: controller.name,
                        hinttext: 'Enter your name',
                        iconDataprefix: Icons.person,
                        keyboardType: TextInputType.name,),
                      const SizedBox(height: 5,),
                      Textformfieldauth(valid: (value ) {
-                       return validateinput(value!, 5 , 25); },
+                       return validateinput(value!, 2 , 25); },
                        mycontroller: controller.username,
                        hinttext: 'Enter user name',
                        iconDataprefix: Icons.person,

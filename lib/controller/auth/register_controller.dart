@@ -49,16 +49,13 @@ class RegistercontrollerImp extends Registercontroller{
     {
       statusRequest = StatusRequest.loading ;
       update();
-      print('000000000000000000000000000000000000');
       var response = await  signupData.postdata( name.text, username.text , email.text , password.text ,confirmpassword.text);
       print("-----------------------------controller $response--------------------");
       statusRequest=handlingData(response);
       if(StatusRequest.success == statusRequest)
-        {  print('11111111111111111111111');
-           if(response["status"] == "Success" ){
-            data.addAll(response['data']);
-            print('sssssssssssssssssssssssssssssssssss');
-            Get.offNamed(AppRoute.homepage);
+        {
+            if(response["status"] == "Success" ){
+            Get.offNamed(AppRoute.login);
           }
           else
             {  Get.defaultDialog(title: "warning" , middleText: "Username or Email Already Exists ");

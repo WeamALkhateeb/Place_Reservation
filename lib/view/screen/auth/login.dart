@@ -39,12 +39,12 @@ class Login extends StatelessWidget {
                            Column(
                     children: [
                       const SizedBox(height: 20,),
-                      Image.asset('assets/images/login.png',
+                       Image.asset('assets/images/login.png',
                       width: 350,
                       height: 300,),
-                          const SizedBox(height: 40,),
+                      const SizedBox(height: 40,),
                         Textformfieldauth(valid: (value ) {
-                          return validateinput(value!, 5 , 25); },
+                          return validateinput(value!, 2 , 25); },
                           mycontroller: controller.username ,
                           hinttext: 'Enter user name',
                           iconDataprefix: Icons.person,

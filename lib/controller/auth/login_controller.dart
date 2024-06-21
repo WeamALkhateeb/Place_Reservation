@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:project2/core/constant/routes.dart';
-
 import '../../core/class/statusrequest.dart';
 import '../../core/functions/handlingData.dart';
 import '../../data/datasource/remote/Auth/login.dart';
+
 
 abstract class Logincontroller extends GetxController{
   Login();
@@ -35,15 +35,12 @@ class LogincontrollerImp extends Logincontroller{
   {
     statusRequest = StatusRequest.loading ;
     update();
-    print('000000000000000000000000000000000000');
     var response = await  loginData.postdata( username.text,password.text);
     print("-----------------------------controller $response--------------------");
     statusRequest=handlingData(response);
     if(StatusRequest.success == statusRequest)
-    {  print('ةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةةة');
-    if(response["status"] == "Success" ){
-      //data.addAll(response['data']);
-      print('sssssssssssssssssssssssssssssssssss');
+    {
+      if(response["status"] == "Success" ){
       Get.offNamed(AppRoute.homepage);
     }
     else

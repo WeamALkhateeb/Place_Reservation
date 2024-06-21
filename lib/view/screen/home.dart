@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:project2/appLink.dart';
 import 'package:project2/controller/home_controller.dart';
 import '../../core/constant/color.dart';
+import '../widget/HomePage/ListCategoriesHome.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -53,30 +54,11 @@ class HomePage extends StatelessWidget {
               ),
             ],
           ),
+
         ),
-        body: SizedBox(
-        height: 200,
-        width: 100,
-        child: ListView.separated(
-          separatorBuilder:(context, index) => const SizedBox(height: 10,),
-          itemCount: controller.categories.length,
-          scrollDirection: Axis.vertical,
-          itemBuilder: (context, index){
-            return Column(
-              children: [
-                Container(
-                  height: 70,
-                  width: 70,
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Image.network("${AppLink.imageCategories}/${controller.categories[index]['image']}"),
-                ),
-                Text("${controller.categories[index]['name']}")
-              ],
-            );
-          },
-        ),
-      ),
+
+        body: ListCategoriesHome(),
+
     ),
   );
  }

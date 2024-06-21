@@ -6,7 +6,7 @@ class HomeData {
   HomeData(this.crud);
 
   getdata()async{
-    var response = await crud.get(AppLink.categories,);
+    var response = await crud.get(AppLink.categories,globalAuthorizationToken!);
     return response.fold((l) => l, (r) => r);
 
   }

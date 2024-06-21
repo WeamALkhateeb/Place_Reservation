@@ -4,9 +4,11 @@ import '../../../core/constant/color.dart';
 
 
 class Textformfieldauth extends StatelessWidget{
+  final double? width ;
+  final double? hight ;
   final TextEditingController mycontroller;
   final String hinttext;
-  final IconData iconDataprefix;
+  final IconData? iconDataprefix;
   final IconData? iconDatasuffix;
   final String? Function(String?)? valid;
   final TextInputType? keyboardType;
@@ -21,14 +23,18 @@ class Textformfieldauth extends StatelessWidget{
     required this.valid,
     this.keyboardType,
     this.obscuretext,
-    required this.iconDataprefix,
+    this.iconDataprefix,
     this.iconDatasuffix,
+    this.width,
+    this.hight,
     this.onTapicon, }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
 
    return  Container(
+     width: width,
+       height: hight,
        margin: const EdgeInsets.symmetric(horizontal:30,vertical: 5),
        child: TextFormField(
          validator: valid,
