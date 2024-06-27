@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project2/view/screen/home.dart';
 
+import '../view/screen/addrequest.dart';
+
 abstract class HomeScreenController extends GetxController {
   void changePage(int i);
 }
@@ -11,14 +13,7 @@ class HomeScreenControllerImp extends HomeScreenController {
 
   List<Widget> listPage = [
     const HomePage(),
-    Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Center(
-          child: Text("add"),
-        ),
-      ],
-    ),
+    const AddRequest(),
     Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

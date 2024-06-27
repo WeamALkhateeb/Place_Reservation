@@ -83,26 +83,7 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
               ),
-<<<<<<< HEAD
-            ),
-            actions:[
-              IconButton(
-                icon: const Icon(Icons.notifications),
-                onPressed: () {},
-              ),
-            ],
-          ),
 
-        ),
-
-        body: ListCategoriesHome(),
-
-    ),
-  );
- }
-}
-=======
       );
     }
   }
->>>>>>> 75292a6ee82d2f5df4801153b356fe1fd56de4a4
