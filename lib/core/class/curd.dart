@@ -9,6 +9,7 @@ import 'dart:io';
 // Declare a global variable
 String? globalAuthorizationToken;
 
+<<<<<<< HEAD
  class Crud {
 
   Future<Either<StatusRequest, Map>> post(String url, Map data, Map<String, String> headers,) async {
@@ -20,6 +21,18 @@ String? globalAuthorizationToken;
     print('Headers: $headers');
     final authorization = headers['authorization'];
 
+=======
+class Crud {
+  Future<Either<StatusRequest, Map>> post(String url, Map data, Map<String, String> headers) async {
+      var response = await http.post(
+      Uri.parse(url),
+      body: data,
+    );
+    final headers = response.headers;
+    print('Headers: $headers');
+    final authorization = headers['authorization'];
+
+>>>>>>> 75292a6ee82d2f5df4801153b356fe1fd56de4a4
     // Store the authorization header in the global variable
     globalAuthorizationToken = authorization;
     print(globalAuthorizationToken);
@@ -36,8 +49,11 @@ String? globalAuthorizationToken;
     }
   }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 75292a6ee82d2f5df4801153b356fe1fd56de4a4
   Future<Either<StatusRequest, Map>> get(String linkurl,String token) async {
     var response = await http.get(
       Uri.parse(linkurl),
@@ -56,6 +72,7 @@ String? globalAuthorizationToken;
       return const Left(StatusRequest.offlinefailure);
     }
   }
+<<<<<<< HEAD
 
 
 
@@ -63,3 +80,6 @@ String? globalAuthorizationToken;
 
  }
 
+=======
+}
+>>>>>>> 75292a6ee82d2f5df4801153b356fe1fd56de4a4
