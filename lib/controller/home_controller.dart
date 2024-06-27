@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:project2/core/class/statusrequest.dart';
+import 'package:project2/core/constant/routes.dart';
 import 'package:project2/core/services/services.dart';
 import 'package:project2/data/datasource/remote/home_data.dart';
 import '../core/functions/handlingData.dart';
@@ -8,6 +9,7 @@ abstract class HomeController extends GetxController {
 
   initialData();
   getdata();
+  goToPlaces(List categories, int categoryid);
 }
 
 class HomeControllerImp extends HomeController {
@@ -49,5 +51,13 @@ class HomeControllerImp extends HomeController {
       }
     }
     update();
+  }
+
+  @override
+  goToPlaces( categories, categoryid ) {
+    Get.toNamed(AppRoute.places, arguments: {
+      "categories"  : categories,
+      "categoryid" : categoryid,
+    }) ;
   }
 }
