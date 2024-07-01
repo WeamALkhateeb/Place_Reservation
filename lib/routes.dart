@@ -5,6 +5,7 @@ import 'package:project2/view/screen/home_screen.dart';
 import 'package:project2/view/screen/language.dart';
 import 'package:project2/view/screen/onboarding.dart';
 import 'package:project2/view/screen/places.dart';
+import 'package:project2/view/screen/places_details.dart';
 import 'core/constant/routes.dart';
 
 List<GetPage<dynamic>>? routes = [
@@ -14,9 +15,6 @@ List<GetPage<dynamic>>? routes = [
     GetPage(name: AppRoute.register, page: ()=> const Register()),
     GetPage(name: AppRoute.homepage, page: ()=> const HomeScreen()),
     GetPage(name: AppRoute.places, page: ()=> const Places()),
-    // AppRoute.login : (context) => const Login(),
-    // AppRoute.register : (context) => const Register(),
-    // AppRoute.homepage : (context) => const HomeScreen(),
-    // AppRoute.places : (context) =>  const Places(),
+    GetPage(name: AppRoute.placesdetails, page: ()=>  const PlacesDetails()),
 ];
 

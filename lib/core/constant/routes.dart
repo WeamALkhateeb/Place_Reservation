@@ -6,5 +6,6 @@ class AppRoute {
   static const String homepage ="/homepage";
   static const String addrequest ="/addrequest";
   static const String places ="/places";
+  static const String placesdetails ="/placesdetails";
 
 }

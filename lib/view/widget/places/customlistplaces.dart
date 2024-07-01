@@ -1,19 +1,22 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:project2/view/screen/onboarding.dart';
+import 'package:get/get.dart';
+import 'package:project2/controller/places_controller.dart';
+import 'package:project2/data/model/myfavorite.dart';
+import '../../../controller/favorite_places.dart';
 import '../../../core/constant/color.dart';
 import '../../../data/model/placesmodel.dart';
 
-class CustomListPlaces extends StatelessWidget {
+class CustomListPlaces extends GetView<PlacesControllerImp> {
   final PlacesModel placesModel;
-  const CustomListPlaces({Key? key, required this.placesModel}) : super(key: key);
+  final bool active;
+  const CustomListPlaces({Key? key,  required this.placesModel , required this.active}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    late MyFavoriteModel myFavoriteModel;
           return InkWell(
             onTap: (){
-
+              controller.goToPlacesDetails(placesModel);
             },
             child: Stack(
              clipBehavior: Clip.none,
@@ -42,11 +45,26 @@ class CustomListPlaces extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              IconButton(
-                                  onPressed: () {
 
-                                  },
-                                  icon: const Icon(Icons.favorite,size: 25,color: Colors.red,))
+                              GetBuilder<FavoriteController>(builder: (controller) => IconButton(
+                                onPressed:(){
+                                  print(controller.myServices.sharedPreferances.toString());
+                                  if(controller.isfavorite[placesModel.id] == true) {
+                                    controller.setFavorite(placesModel.id, false) ;
+                                    controller.deletefav(placesModel.id.toString());
+                                  } else if(controller.isfavorite[placesModel.id] == false) {
+                                    controller.setFavorite(placesModel.id, true) ;
+                                    controller.addfav(placesModel.id.toString());
+                                  }
+                                  print(controller.isfavorite[placesModel.id]) ;
+                                },
+                                icon: Icon(
+                                  controller.isfavorite[placesModel.id]==true
+                                      ? Icons.favorite_outlined
+                                      : Icons.favorite_border_rounded,
+                                  color: Colors.red,
+
+                                ), ))
                             ],
                           ),
                         ],

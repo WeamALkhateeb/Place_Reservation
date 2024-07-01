@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project2/controller/favorite_places.dart';
 import 'package:project2/core/class/handlingdataview.dart';
 import 'package:project2/core/constant/routes.dart';
 import 'package:project2/view/widget/places/customlistplaces.dart';
@@ -14,6 +15,7 @@ class Places extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(PlacesControllerImp());
+    FavoriteController favoriteController = Get.put(FavoriteController());
     return Scaffold(
       body:Container(
             padding: const EdgeInsets.all(15),
@@ -73,8 +75,15 @@ class Places extends StatelessWidget {
                               mainAxisSpacing: 60,
                             ),
                             itemBuilder: (BuildContext context, index) {
+                              if(favoriteController.isfavorite[controller.data[index]['id']] == null) {
+                                favoriteController.setFavorite(controller.data[index]['id'], false) ;
+                              }else{
+                                print(favoriteController.isfavorite[controller.data[index]['id']]);
+                              }
                              return CustomListPlaces(
-                                 placesModel: PlacesModel.fromJson(controller.data[index]));
+                                 placesModel: PlacesModel.fromJson(controller.data[index]),
+                                   active: favoriteController.isfavorite[controller.data[index]['id']],
+                             );
                             }),
                       ),
                      ),
