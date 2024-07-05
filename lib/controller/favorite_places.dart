@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project2/appLink.dart';
 import 'package:project2/core/class/statusrequest.dart';
-import 'package:project2/data/datasource/static.dart';
 import '../core/functions/handlingData.dart';
 import '../core/services/services.dart';
 import '../data/datasource/remote/favorite_places_data.dart';
 import '../data/model/myfavorite.dart';
-
-
+import '../data/model/placesmodel.dart';
 
 class FavoriteController extends GetxController {
   late StatusRequest statusRequest;
@@ -17,22 +15,36 @@ class FavoriteController extends GetxController {
   bool isSearch = false;
   List<MyFavoriteModel> data = [];
   FavoriteData favoriteData = FavoriteData(Get.find());
-  Map isfavorite = {};
- String? favid;
+  Map<int, String> favidMap = {};
+  Map<int, bool> isfavorite = {};
+  String? placesid;
 
-  setFavorite(id, val) {
+  @override
+  void onInit() {
+    super.onInit();
+    loadInitialFavorites();
+  }
+
+  void loadInitialFavorites() {
+    List<PlacesModel> placesList = [];
+    for (var place in placesList) {
+      isfavorite[place.id!] = place.isFavourite == 1;
+    }
+    update();
+  }
+
+  setFavorite(int id, bool val) {
     isfavorite[id] = val;
     update();
   }
 
-  addfav(String place_id) async {
+  addfav(int place_id) async {
     statusRequest = StatusRequest.loading;
     update();
 
     String? userId = myServices.sharedPreferances.getString("id");
 
     if (userId == null) {
-      // التعامل مع الحالة الفارغة
       Get.rawSnackbar(
         title: "خطأ",
         messageText: const Text("لم يتم العثور على معرف المستخدم"),
@@ -41,31 +53,30 @@ class FavoriteController extends GetxController {
       update();
       return;
     }
-
-    var response = await favoriteData.addfavorite(userId, place_id);
-    print("========controller $response");
+    var response = await favoriteData.addfavorite(userId, place_id.toString());
     statusRequest = handlingData(response);
-    favid = response['model']['id'].toString();
-    print("asksakkkkkkkkdssds----------------------${favid}");
-    if (StatusRequest.success == statusRequest) {
-      if (response['status'] == "success") {
-        print("asksakkkkkkkkdssds----------------------${favid}");
+    if (statusRequest == StatusRequest.success && response['status'] == "success") {
+      if (response['model'] != null && response['model']['id'] != null) {
+        favidMap[place_id] = response['model']['id'].toString();
+        setFavorite(place_id, true);
         Get.rawSnackbar(
           title: "اشعار",
           messageText: const Text("تم اضافة المنتج الى fav"),
         );
+      } else {
+        print("Error: favid not found in the response");
       }
     } else {
       statusRequest = StatusRequest.failure;
     }
-
-    update();
   }
 
-  deletefav(String place_id) async {
+  deletefav(int place_id) async {
     statusRequest = StatusRequest.loading;
     update();
+
     String? userId = myServices.sharedPreferances.getString("id");
+
     if (userId == null) {
       Get.rawSnackbar(
         title: "خطأ",
@@ -75,18 +86,30 @@ class FavoriteController extends GetxController {
       update();
       return;
     }
-    var response = await favoriteData.deletefavorite(userId, place_id,"${AppLink.deletefav}""${favid}");
+    String? favid = favidMap[place_id];
+    if (favid == null) {
+      Get.rawSnackbar(
+        title: "خطأ",
+        messageText: const Text("لم يتم العثور على معرف المفضلة"),
+      );
+      statusRequest = StatusRequest.failure;
+      update();
+      return;
+    }
+
+    var response = await favoriteData.deletefavorite(userId, place_id.toString(), "${AppLink.deletefav}$favid");
     print("========controller $response");
     statusRequest = handlingData(response);
-    if (response['status'] == "success") {
+    if (statusRequest == StatusRequest.success && response['status'] == "Success") {
+      setFavorite(place_id, false);
+      favidMap.remove(place_id);
       Get.rawSnackbar(
         title: "اشعار",
-        messageText: const Text("تم حذف المنتج الى السلة"),
+        messageText: const Text("تم حذف المنتج من المفضلة"),
       );
     } else {
       statusRequest = StatusRequest.failure;
     }
-
-    update();
   }
+
 }

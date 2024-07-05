@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project2/controller/favorite_places.dart';
@@ -59,34 +58,38 @@ class Places extends StatelessWidget {
                         ]),
                     ),
                     const SizedBox(height: 20,),
-                    HandlingDataView(
-                      statusRequest: controller.statusRequest,
-                      widget: Padding(
-                        padding: const EdgeInsets.only(right: 8,left: 8, top: 30),
-                        child: GridView.builder(
-                          clipBehavior: Clip.none,
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: controller.data.length,
-                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              childAspectRatio:1,
-                              crossAxisSpacing: 15,
-                              mainAxisSpacing: 60,
-                            ),
-                            itemBuilder: (BuildContext context, index) {
-                              if(favoriteController.isfavorite[controller.data[index]['id']] == null) {
-                                favoriteController.setFavorite(controller.data[index]['id'], false) ;
-                              }else{
-                                print(favoriteController.isfavorite[controller.data[index]['id']]);
-                              }
-                             return CustomListPlaces(
-                                 placesModel: PlacesModel.fromJson(controller.data[index]),
-                                   active: favoriteController.isfavorite[controller.data[index]['id']],
-                             );
-                            }),
-                      ),
-                     ),
+                    GetBuilder<PlacesControllerImp>(
+                      builder:(controller) => HandlingDataView(
+                        statusRequest: controller.statusRequest,
+                        widget: Padding(
+                          padding: const EdgeInsets.only(right: 8,left: 8, top: 30),
+                          child: GridView.builder(
+                            clipBehavior: Clip.none,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: controller.data.length,
+                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                childAspectRatio:1,
+                                crossAxisSpacing: 15,
+                                mainAxisSpacing: 60,
+                              ),
+                              itemBuilder: (BuildContext context, index) {
+                                if (favoriteController.isfavorite[controller.data[index]["id"]] == null) {
+                                  favoriteController.setFavorite(controller.data[index]["id"], controller.data[index]["is_favourite"] == 1);
+                                }
+                                else{
+                                  print(favoriteController.isfavorite[controller.data[index]['id']]);
+                                }
+                                print(favoriteController.isfavorite[controller.data[index]["id"]]);
+                                favoriteController.isfavorite[controller.data[index]["id"]] == controller.data[index]["is_favourite"];
+                               return CustomListPlaces(
+                                   placesModel: PlacesModel.fromJson(controller.data[index]),
+                               );
+                              }),
+                        ),
+                       ),
+                    ),
                     ],
                   ),
               ),

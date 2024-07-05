@@ -21,15 +21,16 @@ class MyFavoriteModel {
 
 class Place {
   int? id;
+  int? status;
+  int? isFavourite;
   String? name;
-  AddressId? addressId;
+  Address? address;
   List<OwnerId>? ownerId;
   int? maximumCapacity;
   int? pricePerHour;
   int? space;
   Null? rate;
   String? license;
-  List<String>? categoryId;
   String? createdAt;
   List<Images>? images;
   List<AvailableTimes>? availableTimes;
@@ -38,15 +39,16 @@ class Place {
 
   Place(
       {this.id,
+        this.status,
+        this.isFavourite,
         this.name,
-        this.addressId,
+        this.address,
         this.ownerId,
         this.maximumCapacity,
         this.pricePerHour,
         this.space,
         this.rate,
         this.license,
-        this.categoryId,
         this.createdAt,
         this.images,
         this.availableTimes,
@@ -55,10 +57,11 @@ class Place {
 
   Place.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    status = json['status'];
+    isFavourite = json['is_favourite'];
     name = json['name'];
-    addressId = json['address_id'] != null
-        ? new AddressId.fromJson(json['address_id'])
-        : null;
+    address =
+    json['address'] != null ? new Address.fromJson(json['address']) : null;
     if (json['owner_id'] != null) {
       ownerId = <OwnerId>[];
       json['owner_id'].forEach((v) {
@@ -100,9 +103,11 @@ class Place {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
+    data['status'] = this.status;
+    data['is_favourite'] = this.isFavourite;
     data['name'] = this.name;
-    if (this.addressId != null) {
-      data['address_id'] = this.addressId!.toJson();
+    if (this.address != null) {
+      data['address'] = this.address!.toJson();
     }
     if (this.ownerId != null) {
       data['owner_id'] = this.ownerId!.map((v) => v.toJson()).toList();
@@ -130,16 +135,16 @@ class Place {
   }
 }
 
-class AddressId {
+class Address {
   int? id;
   String? goverment;
   String? city;
   String? area;
   String? street;
 
-  AddressId({this.id, this.goverment, this.city, this.area, this.street});
+  Address({this.id, this.goverment, this.city, this.area, this.street});
 
-  AddressId.fromJson(Map<String, dynamic> json) {
+  Address.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     goverment = json['goverment'];
     city = json['city'];
