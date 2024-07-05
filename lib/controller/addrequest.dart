@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:project2/data/datasource/remote/addrequest.dart';
@@ -9,7 +7,7 @@ import '../core/functions/handlingData.dart';
 
 
 abstract class AddRequestcontroller extends GetxController{
-  Sendrequest(image , images);
+  Sendrequest(  _imageFiles ,  image);
 
 }
 
@@ -19,7 +17,6 @@ class AddRequestcontrollerImp extends AddRequestcontroller{
   late TextEditingController username;
   late TextEditingController placename;
   late TextEditingController placedetails;
-  //location
   late TextEditingController goverment;
   late TextEditingController city;
   late TextEditingController area;
@@ -28,28 +25,29 @@ class AddRequestcontrollerImp extends AddRequestcontroller{
 
 
 
+
   @override
-  Sendrequest( image , images) async {
+  Sendrequest( _imageFiles , image,) async {
     var formdata = formstate.currentState;
     if(formdata!.validate())
     {
-       statusRequest = StatusRequest.loading ;
-       update();
+      statusRequest = StatusRequest.loading ;
+      update();
       print('111111111111111');
 
-      var response = await  AddrequestData.postdata( username.text, placename.text, placedetails.text, image , images);
+      var response = await  AddrequestData.postdata(username.text ,placename.text, placedetails.text, _imageFiles , image,);
       print("-----------------------------controller $response--------------------");
       statusRequest=handlingData(response);
       if(StatusRequest.success == statusRequest)
       { if(response["status"] == "Success" )
-        {
-          //Get.offNamed(AppRoute.homepage);
-          print('33333333333333333333333');
-        }
-        else
-        {  Get.defaultDialog(title: "warning" , middleText: "User name or Password Not Correct ");
-        statusRequest = StatusRequest.failure;
-        }
+      {
+        //Get.offNamed(AppRoute.homepage);
+        print('33333333333333333333333');
+      }
+      else
+      {  Get.defaultDialog(title: "warning" , middleText: "User name or Password Not Correct ");
+      statusRequest = StatusRequest.failure;
+      }
       }
       update();
     }
@@ -82,4 +80,6 @@ class AddRequestcontrollerImp extends AddRequestcontroller{
     street.dispose();
     super.dispose();
   }
+
+
 }

@@ -8,7 +8,7 @@ import '../../core/constant/color.dart';
 import '../../core/functions/validateinput.dart';
 import '../widget/auth/materialbuttonauth.dart';
 import '../widget/auth/textformfiledauth.dart';
-import 'package:http/http.dart' as http;
+
 
 
 class AddRequest extends StatefulWidget{
@@ -25,6 +25,7 @@ class _AddRequestState extends State<AddRequest> {
   final ImagePicker _picker = ImagePicker();
   List<XFile>? _imageFiles = [];
 
+
   Future _selectImages() async {
     final List<XFile>? selectedImages = await _picker.pickMultiImage();
     if (selectedImages!.isNotEmpty) {
@@ -33,8 +34,9 @@ class _AddRequestState extends State<AddRequest> {
       });
     }
   }
-      //.map((xFile) => File(xFile.path)).cast<XFile>().toList()
-   Future UploadImage() async {
+
+
+  Future UploadImage() async {
     final pickedImage = await _picker.pickImage(
       source: ImageSource.gallery,
       imageQuality: 80,
@@ -49,12 +51,12 @@ class _AddRequestState extends State<AddRequest> {
 
 
 
-  Future sendRequest(String name , String placename , String placedetails , File image , List<File> images ) async {
+  /* Future sendRequest(String name , String placename , String placedetails , File image , List<File> images , String token) async {
     print('111111');
     var headers = {
-      'Authorization': '••••••'
+      'Authorization': 'Bearer ${Crud().to}',
     };
-    var request = http.MultipartRequest('POST', Uri.parse('http://192.168.1.101:8000/api/places'));
+    var request = http.MultipartRequest('POST', Uri.parse('http://192.168.43.134:8000/api/places'));
     print('222222222');
     request.fields.addAll({
       'name':  name ,
@@ -92,7 +94,7 @@ class _AddRequestState extends State<AddRequest> {
       print(response.reasonPhrase);
     }
 
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -100,71 +102,71 @@ class _AddRequestState extends State<AddRequest> {
 
     return Scaffold(
 
-      body:SingleChildScrollView(
-          child: Form(
-            key: controller.formstate,
-            child: GetBuilder<AddRequestcontrollerImp>(
-                builder: (controller) => Column(
-                children: [
-                  const SizedBox(height: 60,),
-                  Textformfieldauth(
-                    mycontroller:controller.username,
-                    hinttext:  'Enter user name',
-                    valid: (value) {  return validateinput(value!, 5 , 25); },
-                    iconDataprefix: Icons.person,
-                    keyboardType: TextInputType.name,),
-                  const SizedBox(height: 10,),
-                  Textformfieldauth(
-                    mycontroller:controller.placename,
-                    hinttext:  'Enter place name ',
-                    valid: (value) {  return validate( value!); },
-                    iconDataprefix: Icons.place,
-                    keyboardType: TextInputType.text,),
-                  const SizedBox(height: 10,),
-                  Textformfieldauth(
-                    mycontroller:controller.placedetails,
-                    hinttext:  ' Write the details for the place ',
-                    valid: (value) { return validate( value!); },
-                    iconDataprefix: Icons.short_text,
-                    iconDatasuffix: Icons.clear,
-                    onTapicon: (){
-                      controller.placedetails.clear();
-                    },
-                    keyboardType: TextInputType.text,),
-                  const SizedBox(height: 15,),
-                  Column(
-                children: [
-                  InkWell(
-                    onTap: (){_selectImages();},
-                    child: Container(
-                      height: 130,
-                      width: 310,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: fourBackColor),
+        body:SingleChildScrollView(
+            child: Form(
+                key: controller.formstate,
+                child: GetBuilder<AddRequestcontrollerImp>(
+                  builder: (controller) => Column(
+                    children: [
+                      const SizedBox(height: 60,),
+                      Textformfieldauth(
+                        mycontroller:controller.username,
+                        hinttext:  'Enter user name',
+                        valid: (value) {  return validateinput(value!, 5 , 25); },
+                        iconDataprefix: Icons.person,
+                        keyboardType: TextInputType.name,),
+                      const SizedBox(height: 10,),
+                      Textformfieldauth(
+                        mycontroller:controller.placename,
+                        hinttext:  'Enter place name ',
+                        valid: (value) {  return validate( value!); },
+                        iconDataprefix: Icons.place,
+                        keyboardType: TextInputType.text,),
+                      const SizedBox(height: 10,),
+                      Textformfieldauth(
+                        mycontroller:controller.placedetails,
+                        hinttext:  ' Write the details for the place ',
+                        valid: (value) { return validate( value!); },
+                        iconDataprefix: Icons.short_text,
+                        iconDatasuffix: Icons.clear,
+                        onTapicon: (){
+                          controller.placedetails.clear();
+                        },
+                        keyboardType: TextInputType.text,),
+                      const SizedBox(height: 15,),
+                      Column(
+                        children: [
+                          InkWell(
+                            onTap: (){_selectImages();},
+                            child: Container(
+                              height: 130,
+                              width: 310,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: fourBackColor),
+                              ),
+                              child: _imageFiles!= null && _imageFiles!.isEmpty
+                                  ? Center(child: Text('To download a photo of the place,\n click here .. '))
+                                  : GridView.builder(
+                                itemCount: _imageFiles!.length,
+                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+                                itemBuilder: (BuildContext context , int index){
+                                  return Image.file(File(_imageFiles![index].path),fit:BoxFit.cover);},
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      child: _imageFiles!= null && _imageFiles!.isEmpty
-                          ? Center(child: Text('To download a photo of the place,\n click here .. '))
-                          : GridView.builder(
-                        itemCount: _imageFiles!.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-                        itemBuilder: (BuildContext context , int index){
-                          return Image.file(File(_imageFiles![index].path),fit:BoxFit.cover);},
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-                  const SizedBox(height: 15,),
-                  InkWell(onTap:(){UploadImage();},
-                    child: Container(
-                        height: 130,
-                        width: 310,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: fourBackColor),
-                        ),
-                        child: image != null ? Image.file(image!.absolute,
-                          fit: BoxFit.cover,) : Center(child:Text('To download a copy of the license ,\n click here .. ')))),
-                 /* const SizedBox(height: 20,),
+                      const SizedBox(height: 15,),
+                      InkWell(onTap:(){UploadImage();},
+                          child: Container(
+                              height: 130,
+                              width: 310,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: fourBackColor),
+                              ),
+                              child: image != null ? Image.file(image!.absolute,
+                                fit: BoxFit.cover,) : Center(child:Text('To download a copy of the license ,\n click here .. ')))),
+                      /* const SizedBox(height: 20,),
                   SafeArea(child: Text('Enter place location')),
                   const SizedBox(height: 15,),
                   Textformfieldauth(
@@ -194,27 +196,20 @@ class _AddRequestState extends State<AddRequest> {
                     valid: (value) { return validate( value!); },
                     iconDataprefix: Icons.location_city,
                     keyboardType: TextInputType.text,),*/
-                  const SizedBox(height: 25,),
-                  MaterialButtonAuth(text: 'Send order',
-                    /*onPressed: () {
-                      if (image!= null && _imageFiles!= null) {
-                       controller.Sendrequest( image , _imageFiles);
-                      }
-                      else {
-                        print("Please select an image and multiple images.");
-                      }
-                    },*/
-                    onPressed: (){
-                      List<File> filesToSend = _imageFiles!
-                          .map((xFile) => File(xFile.path))
-                          .toList(); // تحويل كائنات XFile إلى كائنات File
+                      const SizedBox(height: 25,),
+                      MaterialButtonAuth(text: 'Send order',
+                        onPressed: (){
+                          List<File> filesToSend = _imageFiles!
+                              .map((xFile) => File(xFile.path))
+                              .toList();// تحويل كائنات XFile إلى كائنات File
 
-                      sendRequest(controller.username.text, controller.placename.text, controller.placedetails.text, image!, filesToSend);
-                    },
-                  )
-                ],
-                ),
-    ))));
+
+                          controller.Sendrequest( image! , filesToSend! );
+                        },
+                      )
+                    ],
+                  ),
+                ))));
   }}
 
 

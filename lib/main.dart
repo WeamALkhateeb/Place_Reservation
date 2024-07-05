@@ -4,9 +4,7 @@ import 'package:project2/core/localization/changelocal.dart';
 import 'package:project2/core/localization/translation.dart';
 import 'package:project2/core/services/services.dart';
 import 'package:project2/routes.dart';
-import 'package:project2/view/screen/addrequest.dart';
 import 'package:project2/view/screen/auth/login.dart';
-import 'package:project2/view/screen/places_details.dart';
 import 'bindings/intialbindings.dart';
 
 
