@@ -44,33 +44,33 @@ class Categories extends GetView<HomeControllerImp> {
       },
       child: Column(
         children: [
-          SizedBox(height: 10,),
-          Container(
-      child: Column(
-        children: [
           const SizedBox(height: 10,),
           Container(
-              child: Image.network(
-                    "${categoriesModel.image}"),
-            padding:const EdgeInsets.all(5) ,
-            height: 120 ,
-            width: 160,
-            decoration: BoxDecoration(
-              color: fourBackColor.withOpacity(0.1),
-              borderRadius:BorderRadius.circular(10),
-            ),
+             child: Column(
+                  children: [
+                      const SizedBox(height: 10,),
+                      Container(
+                          child: Image.network(
+                                "${categoriesModel.image}"),
+                        padding:const EdgeInsets.all(5) ,
+                        height: 120 ,
+                        width: 160,
+                        decoration: BoxDecoration(
+                          color: fourBackColor.withOpacity(0.1),
+                          borderRadius:BorderRadius.circular(10),
+                        ),
+                      ),
+                  const SizedBox(height: 10,),
+                  Text("${categoriesModel.name}",
+                    style:const TextStyle(
+                        fontSize: 15,
+                        color: firstBackColor,
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.italic),
+                  ) ,
+             ],
           ),
-          const SizedBox(height: 10,),
-          Text("${categoriesModel.name}",
-            style:const TextStyle(
-                fontSize: 15,
-                color: firstBackColor,
-                fontWeight: FontWeight.w400,
-                fontStyle: FontStyle.italic),
-          ) ,
-        ],
-      ),
-          ),
+        ),
   ],),
     );
   }

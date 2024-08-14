@@ -16,32 +16,31 @@ class HomeScreen extends StatelessWidget {
       bottomNavigationBar: CurvedNavigationBar(
         color: firstBackColor,
         backgroundColor: white,
-        items: const [
+        items:const[
           CurvedNavigationBarItem(
-            child: Icon(Icons.home_outlined,color:secondBackColor,),
-            label: 'Home',
-            labelStyle: TextStyle(color: secondBackColor),
+            child:  Icon(Icons.home_outlined,color:secondBackColor,size: 30,),
+            //label: 'Home'.tr,
+            labelStyle:  TextStyle(color: secondBackColor),
           ),
           CurvedNavigationBarItem(
-
-            child: Icon(Icons.add_circle_outline,color:secondBackColor,),
-            label: 'add',
-            labelStyle: TextStyle(color: secondBackColor),
+            child:  Icon(Icons.add_circle_outline,color:secondBackColor,size: 30,),
+          //  label: 'add'.tr,
+            labelStyle:  TextStyle(color: secondBackColor),
           ),
           CurvedNavigationBarItem(
-            child: Icon(Icons.favorite_border,color:secondBackColor,),
-            label: 'favorite',
-            labelStyle: TextStyle(color: secondBackColor),
+            child:  Icon(Icons.favorite_border,color:secondBackColor,size: 30,),
+          //  label: 'favorite'.tr,
+            labelStyle:  TextStyle(color: secondBackColor),
           ),
           CurvedNavigationBarItem(
-            child: Icon(Icons.notifications_none_sharp,color:secondBackColor,),
-            label: 'notifications',
-            labelStyle: TextStyle(color: secondBackColor),
+            child:  Icon(Icons.shopping_bag_outlined,color:secondBackColor,size: 30,),
+           // label: 'MyReservations'.tr,
+            labelStyle:  TextStyle(color: secondBackColor),
           ),
           CurvedNavigationBarItem(
-            child: Icon(Icons.settings_applications,color:secondBackColor,),
-            label: 'settings',
-            labelStyle: TextStyle(color: secondBackColor),
+            child:  Icon(Icons.settings_applications,color:secondBackColor,size: 30,),
+          //  label: 'settings'.tr,
+            labelStyle:  TextStyle(color: secondBackColor),
           ),
         ],
         onTap: (index) {

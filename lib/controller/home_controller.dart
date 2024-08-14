@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project2/core/class/statusrequest.dart';
 import 'package:project2/core/constant/routes.dart';
 import 'package:project2/core/services/services.dart';
 import 'package:project2/data/datasource/remote/home_data.dart';
+import 'package:project2/data/model/placesmodel.dart';
 import '../core/functions/handlingData.dart';
 
 abstract class HomeController extends GetxController {
@@ -15,14 +17,30 @@ abstract class HomeController extends GetxController {
 class HomeControllerImp extends HomeController {
 
   MyServices myServices = Get.find();
-  HomeData homeData = HomeData(Get.find());
-
+  late StatusRequest statusRequest;
   List categories = [];
-
   late String user_name;
   late String id;
+  HomeData homeData = HomeData(Get.find());
+  List<PlacesModel> listdata = [];
+  late TextEditingController search;
+  bool isSearch = false ;
 
-  late StatusRequest statusRequest;
+  checkSearch(val){
+    if(val == ""){
+      isSearch = false;
+    }
+    update();
+  }
+
+
+  onSearchPlaces(){
+    isSearch = true ;
+    searchData() ;
+    update();
+  }
+
+
 
   @override
   initialData() {
@@ -32,6 +50,7 @@ class HomeControllerImp extends HomeController {
 
   @override
   void onInit(){
+    search = TextEditingController() ;
     getdata();
     initialData();
     super.onInit();
@@ -53,11 +72,35 @@ class HomeControllerImp extends HomeController {
     update();
   }
 
+  searchData() async {
+    statusRequest = StatusRequest.loading;
+    var response = await homeData.searchData(search.text) ;
+    statusRequest = handlingData(response) ;
+    if(StatusRequest.success == statusRequest){
+      if(response['status'] == "Success"){
+        listdata.clear();
+        List responsedata = response['model'] ;
+        listdata.addAll(responsedata.map((e) => PlacesModel.fromJson(e)));
+      }
+      else {
+        statusRequest = StatusRequest.failure;
+      }
+    }
+    print("${statusRequest}wwww") ;
+    update();
+  }
+
   @override
   goToPlaces( categories, categoryid ) {
     Get.toNamed(AppRoute.places, arguments: {
       "categories"  : categories,
       "categoryid" : categoryid,
     }) ;
+  }
+
+  goToPlacesDetails(placesModel) {
+    Get.toNamed(AppRoute.placesdetails, arguments: {
+      "placesmodel" : placesModel,
+    });
   }
 }

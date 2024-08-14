@@ -48,6 +48,7 @@ dependencies:
   shared_preferences: ^2.0.6
   curved_navigation_bar: ^1.0.3
   curved_labeled_navigation_bar: ^2.0.2
+  flutter_datetime_picker: ^1.5.1
 
 
 dev_dependencies:

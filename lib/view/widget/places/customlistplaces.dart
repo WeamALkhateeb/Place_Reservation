@@ -12,6 +12,7 @@ class CustomListPlaces extends GetView<PlacesControllerImp> {
 
   @override
   Widget build(BuildContext context) {
+    double placeRating = double.tryParse(placesModel.rate ?? "0") ?? 0;
     return InkWell(
       onTap: () {
         controller.goToPlacesDetails(placesModel);
@@ -78,7 +79,7 @@ class CustomListPlaces extends GetView<PlacesControllerImp> {
                         Center(
                           child: StarRating(
                             starCount: 5,
-                            rating: placesModel.rate?.toInt() ?? 1,
+                            rating: placeRating,
                             iconSize: 15,
                             color: firstBackColor,
                           ),
@@ -92,7 +93,7 @@ class CustomListPlaces extends GetView<PlacesControllerImp> {
           ),
           Positioned(
             top: -20,
-            left: 25,
+            left: 50,
             child: Image.network(
               (placesModel.images != null && placesModel.images!.isNotEmpty)
                   ? placesModel.images![0].image ?? ""
@@ -108,7 +109,7 @@ class CustomListPlaces extends GetView<PlacesControllerImp> {
 
 class StarRating extends StatelessWidget {
   final int starCount;
-  final int rating;
+  final double rating;
   final double iconSize;
   final Color color;
 

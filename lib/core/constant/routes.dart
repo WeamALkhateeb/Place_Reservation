@@ -7,5 +7,10 @@ class AppRoute {
   static const String addrequest ="/addrequest";
   static const String places ="/places";
   static const String placesdetails ="/placesdetails";
+  static const String reservations ="/reservations";
+  static const String myreservations ="/myreservations";
+  static const String setting ="/setting";
+  static const String aboutas ="/aboutas";
+  static const String contactas ="/contactas";
 
 }

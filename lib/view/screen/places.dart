@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:project2/controller/favorite_places.dart';
 import 'package:project2/core/class/handlingdataview.dart';
 import 'package:project2/core/constant/routes.dart';
+import 'package:project2/view/screen/home.dart';
 import 'package:project2/view/widget/places/customlistplaces.dart';
 import '../../controller/places_controller.dart';
 import '../../core/constant/color.dart';
@@ -40,26 +41,36 @@ class Places extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(width: 10,),
-                          Expanded(child: TextFormField(
+                          Expanded(
+                            child: TextFormField(
+                              onChanged: (val){
+                                controller.checkSearch(val) ;
+                              },
+                              controller: controller.search,
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: sixBackColor,
                                 contentPadding:const  EdgeInsets.only(top: 10,bottom: 20),
-                                hintText: 'search',
+                                hintText: 'Search'.tr,
                                 hintStyle:const TextStyle(fontSize: 15),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide:const BorderSide(color: sixBackColor, width: 2),
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(100 )),
-                                prefixIcon: const Icon(Icons.search,color: fourBackColor,),
+                                prefixIcon: IconButton(
+                                  icon:const Icon(Icons.search,color: fourBackColor,),
+                                  onPressed: (){
+                                    controller.onSearchPlaces();
+                                  },
+                                ),
                               )
                           ),),
                         ]),
                     ),
                     const SizedBox(height: 20,),
-                    GetBuilder<PlacesControllerImp>(
-                      builder:(controller) => HandlingDataView(
+                     GetBuilder<PlacesControllerImp>(
+                      builder:(controller) =>!controller.isSearch ? HandlingDataView(
                         statusRequest: controller.statusRequest,
                         widget: Padding(
                           padding: const EdgeInsets.only(right: 8,left: 8, top: 30),
@@ -88,8 +99,9 @@ class Places extends StatelessWidget {
                                );
                               }),
                         ),
-                       ),
-                    ),
+                       ) : ListPlacesSearch(listdataModel: controller.listdata),
+                    )
+
                     ],
                   ),
               ),

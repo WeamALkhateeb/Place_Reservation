@@ -71,7 +71,7 @@ String? globalAuthorizationToken;
        if (response.statusCode == 200) {
          return Right(responseBody);
        } else if (response.statusCode == 400 || response.statusCode == 401) {
-         return Left(StatusRequest.serverfailure);
+         return Right(responseBody);
        } else {
          return Left(StatusRequest.offlinefailure);
        }

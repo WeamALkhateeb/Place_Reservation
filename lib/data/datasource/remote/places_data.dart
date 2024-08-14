@@ -1,4 +1,4 @@
-import '../../../../core/class/curd.dart';
+import '../../../core/class/curd.dart';
 
 class PlacesData{
   Crud crud;
@@ -7,7 +7,5 @@ class PlacesData{
     getdata(String link) async {
       var response = await crud.get(link,globalAuthorizationToken!);
       return response.fold((l) => l, (r) => r) ;
-
     }
   }
-

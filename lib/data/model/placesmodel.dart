@@ -5,12 +5,13 @@ class PlacesModel {
   int? status;
   int? isFavourite;
   String? name;
+  String? day_hour;
   Address? address;
   List<OwnerId>? ownerId;
   int? maximumCapacity;
   int? pricePerHour;
   int? space;
-  Null? rate;
+  String? rate;
   String? license;
   String? createdAt;
   List<Images>? images;
@@ -23,6 +24,7 @@ class PlacesModel {
         this.status,
         this.isFavourite,
         this.name,
+        this.day_hour,
         this.address,
         this.ownerId,
         this.maximumCapacity,
@@ -41,6 +43,7 @@ class PlacesModel {
     status = json['status'];
     isFavourite = json['is_favourite'];
     name = json['name'];
+    day_hour = json['day_hour'];
     address =
     json['address'] != null ? new Address.fromJson(json['address']) : null;
     if (json['owner_id'] != null) {
@@ -87,6 +90,7 @@ class PlacesModel {
     data['status'] = this.status;
     data['is_favourite'] = this.isFavourite;
     data['name'] = this.name;
+    data['day_hour'] = this.day_hour;
     if (this.address != null) {
       data['address'] = this.address!.toJson();
     }

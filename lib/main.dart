@@ -5,6 +5,8 @@ import 'package:project2/core/localization/translation.dart';
 import 'package:project2/core/services/services.dart';
 import 'package:project2/routes.dart';
 import 'package:project2/view/screen/auth/login.dart';
+import 'package:project2/view/screen/language.dart';
+import 'package:project2/view/screen/reservations.dart';
 import 'bindings/intialbindings.dart';
 
 
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
       translations: MyTranslation(),
       debugShowCheckedModeBanner: false,
       locale: controller.language,
-      home:  const Login(),
+      home:  const Language(),
       initialBinding: initalBindings(),
       getPages: routes ,
 

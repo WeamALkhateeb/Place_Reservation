@@ -8,7 +8,13 @@ class HomeData {
   getdata()async{
     var response = await crud.get(AppLink.categories,globalAuthorizationToken!);
     return response.fold((l) => l, (r) => r);
+  }
 
+  searchData(String search) async {
+    String link = "${AppLink.searchplaces}""${search}";
+    var response = await crud.get(link,globalAuthorizationToken!);
+    print(link +"=========== ${response}");
+    return response.fold((l) => l, (r) => r) ;
   }
 
 }

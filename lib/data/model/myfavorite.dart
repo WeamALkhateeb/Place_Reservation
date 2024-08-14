@@ -1,12 +1,12 @@
 class MyFavoriteModel {
   int? id;
-  OwnerId? place;
+  Place? place;  // تغيير النوع إلى Place بدلاً من OwnerId
 
   MyFavoriteModel({this.id, this.place});
 
   MyFavoriteModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    place = json['place'] != null ? new OwnerId.fromJson(json['place']) : null;
+    place = json['place'] != null ? Place.fromJson(json['place']) : null;  // تعديل هنا أيضًا
   }
 
   Map<String, dynamic> toJson() {
@@ -19,17 +19,19 @@ class MyFavoriteModel {
   }
 }
 
+
 class Place {
   int? id;
   int? status;
   int? isFavourite;
   String? name;
+  String? dayHour;
   Address? address;
   List<OwnerId>? ownerId;
   int? maximumCapacity;
   int? pricePerHour;
   int? space;
-  Null? rate;
+  String? rate;
   String? license;
   String? createdAt;
   List<Images>? images;
@@ -42,6 +44,7 @@ class Place {
         this.status,
         this.isFavourite,
         this.name,
+        this.dayHour,
         this.address,
         this.ownerId,
         this.maximumCapacity,
@@ -60,6 +63,7 @@ class Place {
     status = json['status'];
     isFavourite = json['is_favourite'];
     name = json['name'];
+    dayHour = json['day_hour'];
     address =
     json['address'] != null ? new Address.fromJson(json['address']) : null;
     if (json['owner_id'] != null) {
@@ -106,6 +110,7 @@ class Place {
     data['status'] = this.status;
     data['is_favourite'] = this.isFavourite;
     data['name'] = this.name;
+    data['day_hour'] = this.dayHour;
     if (this.address != null) {
       data['address'] = this.address!.toJson();
     }
