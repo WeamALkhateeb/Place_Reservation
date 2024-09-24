@@ -29,17 +29,19 @@ class ReservationDetailsControllerImp extends ReservationDetailsController {
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
       if (response["status"] == "Success") {
+        String errorMessage = response['message'] ?? response['model']?['original']?['message'] ?? 'تم الحجز بنجاح';
         print("Success");
         Get.snackbar(
-          "نجاح",
-          "تم الحجز بنجاح",
+          ".",
+          errorMessage,
           snackPosition: SnackPosition.TOP,
           backgroundColor: Colors.green,
           colorText: Colors.white,
           duration: Duration(seconds: 3),
         );
+        Get.offAndToNamed(AppRoute.myreservations);
       } else if (response["status"] == "Error") {
-        String errorMessage = response['message'] ?? 'حدث خطأ غير معروف';
+        String errorMessage = response['message'] ?? response['model']?['original']?['message'] ?? 'حدث خطأ غير معروف';
         if (response['error_list'] != null) {
           errorMessage = response['error_list'].values.join(', ');
         }
@@ -66,17 +68,19 @@ class ReservationDetailsControllerImp extends ReservationDetailsController {
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
       if (response["status"] == "Success") {
+        String errorMessage = response['message'] ?? response['model']?['original']?['message'] ?? 'تم الحجز بنجاح';
         print("Success");
         Get.snackbar(
-          "نجاح",
-          "تم الحجز بنجاح",
+          ".",
+          errorMessage,
           snackPosition: SnackPosition.TOP,
           backgroundColor: Colors.green,
           colorText: Colors.white,
           duration: Duration(seconds: 3),
         );
+        Get.offAndToNamed(AppRoute.myreservations);
       } else if (response["status"] == "Error") {
-        String errorMessage = response['message'] ?? 'حدث خطأ غير معروف';
+        String errorMessage = response['message'] ?? response['model']?['original']?['message'] ?? 'حدث خطأ غير معروف';
         if (response['error_list'] != null) {
           errorMessage = response['error_list'].values.join(', ');
         }

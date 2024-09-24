@@ -377,7 +377,7 @@ class PlacesDetails extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: ExpansionTile(
-                title:  Text(
+                title: Text(
                   'View Available Times'.tr,
                   style: const TextStyle(
                     color: firstBackColor,
@@ -385,33 +385,50 @@ class PlacesDetails extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                children: availableTimes.map((time) {
+                children: availableTimes.where((time) {
+                  // تحقق من النمط قبل العرض
+                  if (controller.placesModel.day_hour == 'HOURS') {
+                    return true; // عرض جميع الأوقات (الأيام مع الساعات)
+                  } else if (controller.placesModel.day_hour == 'DAYS') {
+                    return true; // عرض الأيام فقط
+                  }
+                  return false;
+                }).map((time) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 5),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          '${time.day}:   ${time.fromTime}   -   ${time.toTime}',
-                          style: const TextStyle(fontSize: 15),
-                        ),
+                        // عرض الأوقات المتاحة بناءً على النمط
+                        if (controller.placesModel.day_hour == 'HOURS')
+                          Text(
+                            '${time.day}:   ${time.fromTime}   -   ${time.toTime}',
+                            style: const TextStyle(fontSize: 15),
+                          )
+                        else if (controller.placesModel.day_hour == 'DAYS')
+                          Text(
+                            '${time.day}', // عرض اليوم فقط دون الساعات
+                            style: const TextStyle(fontSize: 15),
+                          ),
                       ],
                     ),
                   );
                 }).toList(),
               ),
             ),
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Row(
                 children: [
                   Expanded(
-                    child: Text(
+                    child: Obx(() => Text(
                       selectedDate.value == null
                           ? 'choose date :'.tr
                           : '${selectedDate.value!.year}-${formatNumber(selectedDate.value!.month)}-${formatNumber(selectedDate.value!.day)}',
                       style: const TextStyle(fontSize: 18, color: firstBackColor),
-                    ),
+                    )),
+
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -431,12 +448,13 @@ class PlacesDetails extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      child: Text(
+                      child: Obx(() => Text(
                         selectedStartTime.value == null
                             ? 'choose startTime :'.tr
                             : '${formatNumber(selectedStartTime.value!.hour)}:${formatNumber(selectedStartTime.value!.minute)}',
                         style: const TextStyle(fontSize: 18),
-                      ),
+                      )),
+
                     ),
                     ElevatedButton(
                       onPressed: () {
@@ -455,12 +473,13 @@ class PlacesDetails extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      child: Text(
+                      child: Obx(() => Text(
                         selectedEndTime.value == null
                             ? 'choose endTime :'.tr
                             : '${formatNumber(selectedEndTime.value!.hour)}:${formatNumber(selectedEndTime.value!.minute)}',
                         style: const TextStyle(fontSize: 18),
-                      ),
+                      )),
+
                     ),
                     ElevatedButton(
                       onPressed: () {
@@ -480,12 +499,12 @@ class PlacesDetails extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      child: Text(
+                      child:Obx(() =>  Text(
                         selectedDays.value == null
                             ? 'choose number of days :'
                             : '${selectedDays.value} days',
                         style: const TextStyle(fontSize: 18, color: firstBackColor),
-                      ),
+                      ),),
                     ),
                     DropdownButton<int>(
                       value: selectedDays.value,

@@ -91,6 +91,7 @@ class ReservationsControllerImp extends ReservationsController {
 
   getMyReservations() async{
     statusRequest = StatusRequest.loading ;
+    update();
     var response = await reservationsData.getMyReservations();
     print("-----------------------------controller $response--------------------");
     statusRequest=handlingData(response);

@@ -1,6 +1,6 @@
 class AppLink
 {
-  static const String url = "http://192.168.1.110:8000/api";
+  static const String url = "http://192.168.140.203:8000/api";
   static const String signup ="$url/auth/register";
   static const String loginup = "$url/auth/login";
   static String logout= "$url/auth/logout" ;
@@ -15,7 +15,7 @@ class AppLink
   static String viewfav = "$url/favourites";
 
   // ================================== Images ======================
-  static const String image ="http://192.168.1.110:8000";
+  static const String image ="http://192.168.140.203:8000";
   static const String imageCategories ="$image/storage/app/public/categories/";
 
   //=============================== Reservations ====================

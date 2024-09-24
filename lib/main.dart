@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       translations: MyTranslation(),
       debugShowCheckedModeBanner: false,
       locale: controller.language,
-      home:  const Language(),
+      home:  const Login(),
       initialBinding: initalBindings(),
       getPages: routes ,
 

@@ -176,7 +176,7 @@ class User {
     email = json['email'];
     userName = json['user_name'];
     role = json['role'];
-    balance = json['balance'];
+   // balance = json['balance'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
